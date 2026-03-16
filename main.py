@@ -2,6 +2,7 @@ from fastmcp import FastMCP
 import aiosqlite
 import uuid
 from datetime import datetime
+import os
 
 # Initialize MCP server
 mcp = FastMCP("Expense Tracker MCP Server")
@@ -240,8 +241,10 @@ async def clear_expenses(user_id: str):
 # START SERVER
 # -------------------------
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+
     mcp.run(
         transport="http",
         host="0.0.0.0",
-        port=8000
+        port=port
     )
